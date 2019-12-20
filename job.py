@@ -8,6 +8,7 @@ __date__ = 'Octobre 2019'
 
 class Job():
 
+
     def __init__(self,
                  numero,
                  tab_durees = []):

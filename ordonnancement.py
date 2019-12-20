@@ -10,6 +10,13 @@ import job
 
 
 class Ordonnancement():
+	def __str__(self):
+		L = self.to_index()
+		ch = '['
+		for i in L:
+			ch = ch+str(i)+","
+		ch=ch+']'
+		return ch
 
 	# constructeur pour un ordonnancement vide
 	def __init__(self, nb_machines):
@@ -86,7 +93,9 @@ if __name__ == "__main__":
 	List_Job = [job1, job2, job3, job1]
 
 	ordo = Ordonnancement(5)
+	print(len(ordo.sequence()))
 	ordo.ordonnancer_liste_job(List_Job)
+	print(len(ordo.sequence()))
 
 	ordo.afficher()
 	print("ordo.date_dispo[0]=", ordo.date_dispo[0])
@@ -95,5 +104,7 @@ if __name__ == "__main__":
 	print("job2.duree_job=", job2.duree_job)
 	print(ordo.to_index())
 	ordo.afficher()
+
+	print(ordo)
 
 	pass
