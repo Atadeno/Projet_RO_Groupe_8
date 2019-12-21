@@ -52,7 +52,9 @@ class Job():
 
 if __name__ == "__main__":
     job_test = Job(1, [1, 2, 10, 4, 7])
+    job_test0 = Job(1, [1, 2, 10, 4, 7])
     job_test.afficher()
-    print(job_test)
-    print(sum(job_test.duree_op))
-    pass
+    #print(job_test)
+    #print(sum(job_test.duree_op))
+    #pass
+    print(job_test == job_test0)
