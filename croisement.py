@@ -1,6 +1,6 @@
 """
 Algorithme Génétique
-- sCroisement
+- Croisement
 """
 
 import ordonnancement as ord
@@ -35,12 +35,12 @@ def croiser_liste(L, M):
     new_L = L1 + M2 + L3
     new_M = M1 + L2 + M3
     # R : y avait job.num alors que job est un int
-    index_L = [job for job in new_L]
-    index_M = [job for job in new_M]
+    index_L = [job for job in new_L] #? 
+    index_M = [job for job in new_M] #?
 
     index_L = new_L
     index_M = new_M
-    # R : j'ai commenté ceci, l'utilité détecter les doublons me parait
+    # R : j'ai commenté ceci, l'utilité détecter les doublons qui apparaissent
     """"
     for index in new_L:
         if index_L.count(index) > 1:
@@ -55,23 +55,23 @@ def croiser_liste(L, M):
     """""
     return index_L, index_M
 
-# R : répare les deux listes de jobs qui ont été croisées, l'entrée c'est le résulter de la méthode dessus h
-# les valeurs des deux liste doivent etre exactement dans l'ensemble {1,2,3 ... Nb_job}, jobs compté de 1
+# R : répare les deux listes de jobs qui ont été croisées, l'entrée c'est le résultat de la méthode dessus
+# les valeurs des deux listes doivent être exactement dans l'ensemble {1,2,3 ... Nb_job}, jobs compté de 1
 # une modification de réparation ne peut se faire que dans la sous-liste éxogène de numéros
 def repair(list_jobs_L, list_jobs_M) :
     Nb_job = len(list_jobs_L)
-    index_L= []
+    index_L = []
     index_M = []
-    # On remplace les jobs par leurs numeros respctifs pour les deux listes de jobs
+    # on remplace les jobs par leurs numéros respectifs pour les deux listes de jobs
     for job in list_jobs_L :
         index_L.append(job.numero())
     for job in list_jobs_M :
         index_M.append(job.numero())
     # visualiser les listes d'entiers
-    """""
+    """
     print("index_L",index_L)
     print("index_M", index_M)
-    """""
+    """
     # problème du comptage des jobs à partir de 1 ou de 0 résolu par cette condition
     if 0 in index_L or 0 in index_M :
         maximum = Nb_job-1
@@ -81,7 +81,7 @@ def repair(list_jobs_L, list_jobs_M) :
         minimum = 1
 
     # Etape 1 : Doublons
-    # ces deux listes contiendront des tuples des élèments doublés (dans la sous-liste exogène) avec leurs positions respectives, les positions  doivent etre
+    # ces deux listes contiendront des tuples des élèments doublés (dans la sous-liste exogène) avec leurs positions respectives, les positions doivent être dans
     # l'intervalle [Nb_job//3,2*Nb_job//3]
     doubled_elements_L = []
     doubled_elements_M = []
@@ -91,12 +91,12 @@ def repair(list_jobs_L, list_jobs_M) :
         if index_M.count(index_M[i]) > 1 :
             doubled_elements_M.append((index_M[i],i))
     # tester la détection des doublons
-    """""
+    """
     print("Doubles L",doubled_elements_L)
     print("Doubles M", doubled_elements_M)
-    """""
+    """
     # Etape 2 : Manquants
-    #ces deux listes contiendront des tuples des élèments manquants
+    # ces deux listes contiendront des tuples des élèments manquants
     missing_elements_L = []
     missing_elements_M = []
     for i in range(minimum, maximum+1):
@@ -112,21 +112,21 @@ def repair(list_jobs_L, list_jobs_M) :
         if indice_M == False:
             missing_elements_M.append(i)
     # tester la détection des manquants
-    """""
+    """
     print("Missing L", missing_elements_L)
     print("Missing M", missing_elements_M)
-    """""
-    #Etape 3 : Remplacer les doublons par les manquants
+    """
+    # Etape 3 : Remplacer les doublons par les manquants
     # on remplace les doublons dans les listes exogènes par les manquants
     for i in range(0, len(doubled_elements_L)):
         index_L[doubled_elements_L[i][1]] = missing_elements_L[i]
         index_M[doubled_elements_M[i][1]] = missing_elements_M[i]
-    # Retourne les listes des entiers après croisement
+    # retourne les listes des entiers après croisement
     # print pour tests
-    """""
+    """
     print(index_L)
     print(index_M)
-    """""
+    """
     # On revient aux jobs
     well_formed_kids_L = [ None for i in range(0,Nb_job)]
     well_formed_kids_M = [ None for i in range(0,Nb_job)]
@@ -139,14 +139,14 @@ def repair(list_jobs_L, list_jobs_M) :
                 well_formed_kids_M[i] = job
 
     # afficher le réparage des jobs
-    """""
+    """
     print("well_formed_kids_L")
     for job in well_formed_kids_L :
         job.afficher()
     print("well_formed_kids_M")
     for job in well_formed_kids_M :
         job.afficher()
-    """""
+    """
     return well_formed_kids_L , well_formed_kids_M
 
 
@@ -168,8 +168,7 @@ def create_two_kids(parent_1, parent_2):
 
     kid1.ordonnancer_liste_job(l1)
     kid2.ordonnancer_liste_job(l2)
-    print()
-
+    
     return kid1, kid2
 
 
@@ -178,8 +177,8 @@ def create_two_kids(parent_1, parent_2):
 # retourne une nouvelle population de taille 2*N
 def generate(population):
     kids = []
-    for index in range(int(len(population) / 2)):
-        kid1, kid2 = create_two_kids(population[index], population[index + 1])
+    for index in range(int(len(population)/2)):
+        kid1, kid2 = create_two_kids(population[2*index], population[2*index + 1])
         kids.append(kid1)
         kids.append(kid2)
     return population + kids
@@ -201,7 +200,7 @@ if __name__ == '__main__':
     liste1 = [job1, job4, job5, job3, job2, job6]
     liste2 = [job5, job3, job4, job6, job1, job2]
 
-    """""
+
     liste3 = [job1, job2, job3, job4, job5, job6]
     liste4 = [job6, job5, job4, job3, job2, job1]
     liste5 = [job6, job4, job5, job3, job1, job2]
@@ -223,9 +222,8 @@ if __name__ == '__main__':
 
     population = [parent_1, parent_2, parent_3, parent_4, parent_5, parent_6]
     new_population = generate(population)
-    for person in new_population:
-    print("person ", person)
-    """""
+    print(len(new_population))
+
 
     # R : Test de la fonction repair pour deux listes des jobs  :
     #index_L,index_M = croiser_liste(L,M)  #le croisement super
