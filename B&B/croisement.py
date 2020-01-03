@@ -1,7 +1,6 @@
 """
 Algorithme Génétique
 - sCroisement
-
 """
 
 import ordonnancement as ord
@@ -15,14 +14,16 @@ def swap(A, B, i, j):
     return A, B
 
 
-# prend deux liste d'entiers entrée
+# prend deux listes d'entiers entrée
 # croise ces deux listes d'entiers
 # retourne les deux listes d'entiers croisées
+
 def croiser_liste(L, M):
     try:
         len(M) != len(L)
     except:
         print("ERREUR: les longueurs des solutions à croiser ne sont pas égales")
+        
     L1 = L[0: int(len(L) / 3)]
     L2 = L[int(len(L) / 3): int(2 * len(L) / 3)]
     L3 = L[int(2 * len(L) / 3): len(L)]
