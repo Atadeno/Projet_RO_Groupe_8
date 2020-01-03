@@ -223,6 +223,8 @@ if __name__ == '__main__':
     population = [parent_1, parent_2, parent_3, parent_4, parent_5, parent_6]
     new_population = generate(population)
     print(len(new_population))
+    for individu in population:
+        individu.afficher()
 
 
     # R : Test de la fonction repair pour deux listes des jobs  :
