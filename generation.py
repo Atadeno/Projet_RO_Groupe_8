@@ -20,16 +20,13 @@ def generation_aleatoire():
         random.shuffle(liste_job) # Mélange des jobs
         ordo_new = ordonnancement.Ordonnancement(nb_machines) # Création d'un nouvel ordonnancement
         ordo_new.ordonnancer_liste_job(liste_job) # Ordonnancer avec la nouvelle liste
-        """
-        ordo_new.afficher()
-        """
         population_initiale.append(ordo_new)
         i-=-1
     return population_initiale
 
 pop = generation_aleatoire()
 
-# Print pour comprendre le problème de la fonction afficher()
-
+"""
 for i in range (10):
     pop[i].afficher()
+"""
