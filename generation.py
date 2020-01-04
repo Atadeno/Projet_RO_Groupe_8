@@ -12,7 +12,6 @@ flow_shop = flowshop.Flowshop()
 ordo = flow_shop.definir_par("jeu1.txt") # Construction d'un problème avec un fichier .txt
 nb_machines = ordo.nb_machines
 
-
 def generation_aleatoire():
     population_initiale=[]
     i = 0
