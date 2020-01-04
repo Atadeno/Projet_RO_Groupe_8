@@ -78,7 +78,7 @@ if __name__ == "__main__":
                 ordo = ordonnancement.Ordonnancement(flow_shop.nb_machines)
                 list_jobs = [flow_shop.get_job_by_id(i) for i in new_seq]
                 ordo.ordonnancer_liste_job(list_jobs)
-                ordo.afficher()
+                #ordo.afficher()
                 new_val = flow_shop.calculer_borne_inf(ordo, new_seq)
                 new_num = s.numero() + 1
                 new_s = Sommet(new_seq, new_non_place, new_val, new_num)

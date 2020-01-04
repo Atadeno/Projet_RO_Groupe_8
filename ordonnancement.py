@@ -60,7 +60,7 @@ class Ordonnancement():
 		print("Durée ordo =", self.dur)
 
 	# exo 2 A REMPLIR
-	def ordonnancer_job(self, new_job):
+	def ordonnancer_job(self, new_job):               
 		if not(new_job in self.seq):
 			self.seq.append(new_job)
 			self.fixer_date_debut_operation(new_job, 0, self.date_dispo[0])
@@ -94,6 +94,6 @@ if __name__ == "__main__":
 	print("ordo.date_dispo[1]=", ordo.date_dispo[1])
 	print("job2.duree_job=", job2.duree_job)
 	print(ordo.to_index())
-	ordo.afficher()
+
 
 	pass
