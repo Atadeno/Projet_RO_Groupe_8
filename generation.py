@@ -9,7 +9,7 @@ import random
 N = 10000 # TD Choisir N en fonction du nombre de jobs, N est pair
 
 flow_shop = flowshop.Flowshop()
-ordo = flow_shop.definir_par("jeu1.txt") # Construction d'un problème avec un fichier .txt
+ordo = flow_shop.definir_par("jeu2.txt") # Construction d'un problème avec un fichier .txt
 nb_machines = ordo.nb_machines
 liste_job = ordo.seq
 
