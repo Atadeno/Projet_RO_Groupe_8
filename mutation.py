@@ -1,7 +1,6 @@
-
 import generation
-import random
 import ordonnancement
+import random
 
 ### Mutation ###
 
@@ -25,5 +24,7 @@ def mutation_population(population):
         if (p <= 10): # Probabilité de mutation: 10%
             population[i] = muter(population[i])
 
-pop = generation.generation_aleatoire()
+"""
+pop = generation.generation_aleatoire("jeu2.txt", 1000)
 mutation_population(pop)
+"""
