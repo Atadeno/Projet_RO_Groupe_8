@@ -24,7 +24,6 @@ while (t < 1000):
     mutation.mutation_population(population) # Mutation
     population = selection.selection_population(population, p) # Sélection
     if Cmin > population[0].dur: # Sauvegarde du meilleur individu
-        print("Nouvel Alpha trouvé")
         Cmin = population[0].dur
         meilleure_sequence = population[0].seq
     t-=-1
