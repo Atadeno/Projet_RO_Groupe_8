@@ -17,11 +17,11 @@ def muter(ordo_initial):
     ordo.ordonnancer_liste_job(ordo_initial.seq)
     return ordo
     
-def mutation_population(population):
+def mutation_population(population, pourcentage):
     N = len(population)//2
     for i in range(N,2*N):
         p = random.randint(1,100)
-        if (p <= 10): # Probabilité de mutation: 10%
+        if (p <= pourcentage): # Probabilité de mutation: pourcentage%
             population[i] = muter(population[i])
 
 """
