@@ -53,6 +53,14 @@ def croiser_liste(L, M):
     print("indexes_L", index_L)
     print("indexes_M", index_M)
     """""
+    print("L")
+    for job in L :
+        print(job.numero(),"  ",end = '')
+    print(" ")
+    print("M")
+    for job in M :
+        print(job.numero(),"  ",end = '')
+    print(" ")
     return index_L, index_M
 
 # R : répare les deux listes de jobs qui ont été croisées, l'entrée c'est le résultat de la méthode dessus
@@ -68,10 +76,10 @@ def repair(list_jobs_L, list_jobs_M) :
     for job in list_jobs_M :
         index_M.append(job.numero())
     # visualiser les listes d'entiers
-    """
+
     print("index_L",index_L)
     print("index_M", index_M)
-    """
+
     # problème du comptage des jobs à partir de 1 ou de 0 résolu par cette condition
     if 0 in index_L or 0 in index_M :
         maximum = Nb_job-1
@@ -91,10 +99,10 @@ def repair(list_jobs_L, list_jobs_M) :
         if index_M.count(index_M[i]) > 1 :
             doubled_elements_M.append((index_M[i],i))
     # tester la détection des doublons
-    """
+
     print("Doubles L",doubled_elements_L)
     print("Doubles M", doubled_elements_M)
-    """
+
     # Etape 2 : Manquants
     # ces deux listes contiendront des tuples des élèments manquants
     missing_elements_L = []
@@ -112,10 +120,10 @@ def repair(list_jobs_L, list_jobs_M) :
         if indice_M == False:
             missing_elements_M.append(i)
     # tester la détection des manquants
-    """
+
     print("Missing L", missing_elements_L)
     print("Missing M", missing_elements_M)
-    """
+
     # Etape 3 : Remplacer les doublons par les manquants
     # on remplace les doublons dans les listes exogènes par les manquants
     for i in range(0, len(doubled_elements_L)):
@@ -123,10 +131,10 @@ def repair(list_jobs_L, list_jobs_M) :
         index_M[doubled_elements_M[i][1]] = missing_elements_M[i]
     # retourne les listes des entiers après croisement
     # print pour tests
-    """
+
     print(index_L)
     print(index_M)
-    """
+
     # On revient aux jobs
     well_formed_kids_L = [ None for i in range(0,Nb_job)]
     well_formed_kids_M = [ None for i in range(0,Nb_job)]
@@ -139,14 +147,17 @@ def repair(list_jobs_L, list_jobs_M) :
                 well_formed_kids_M[i] = job
 
     # afficher le réparage des jobs
-    """
+
     print("well_formed_kids_L")
     for job in well_formed_kids_L :
-        job.afficher()
+        print(job.numero(),"  ",end = '')
+        #job.afficher()
+    print(" ")
     print("well_formed_kids_M")
     for job in well_formed_kids_M :
-        job.afficher()
-    """
+        print(job.numero(),"  ",end = '')
+        #job.afficher()
+
     return well_formed_kids_L , well_formed_kids_M
 
 
@@ -197,6 +208,10 @@ if __name__ == '__main__':
     job5 = job.Job(5, [97, 73, 33, 69, 94, 37, 86, 98, 18, 41])
     job6 = job.Job(6, [10, 93, 71, 51, 14, 44, 67, 55, 41, 46])
 
+    # listes de 5 job pour test l'indexation R et W :
+    listeL = [job1, job4, job5, job3, job2]
+    listeM = [job5, job3, job4, job1, job2]
+
     liste1 = [job1, job4, job5, job3, job2, job6]
     liste2 = [job5, job3, job4, job6, job1, job2]
 
@@ -220,15 +235,16 @@ if __name__ == '__main__':
     parent_5.ordonnancer_liste_job(liste5)
     parent_6.ordonnancer_liste_job(liste6)
 
+    """
     population = [parent_1, parent_2, parent_3, parent_4, parent_5, parent_6]
     new_population = generate(population)
     print(len(new_population))
     for individu in population:
         individu.afficher()
 
-
     # R : Test de la fonction repair pour deux listes des jobs  :
     #index_L,index_M = croiser_liste(L,M)  #le croisement super
-    repair(croiser_liste(liste1,liste2)[0],croiser_liste(liste1,liste2)[1])
-
+    """
+    L_index, M_index = croiser_liste(listeL, listeM)
+    repair(L_index, M_index)
 
