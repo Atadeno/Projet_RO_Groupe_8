@@ -1,0 +1,15 @@
+Fichier | Cmin | Optimal | Ecart
+jeu1.txt 54 54 0.0%
+jeu2.txt 704 704 0.0%
+tai01.txt 1297 1278 1.5%
+tai02.txt 1359 1359 0.0%
+tai11.txt 1598 1582 1.0%
+tai12.txt 1672 1659 0.8%
+tai21.txt 2373 2297 3.3%
+tai22.txt 2148 2099 2.3%
+tai31.txt 2752 2724 1.0%
+tai32.txt 2882 2834 1.7%
+tai41.txt 3135 2991 4.8%
+tai42.txt 2984 2867 4.1%
+tai51.txt 4014 3874 3.6%
+tai52.txt 3979 3704 7.4%

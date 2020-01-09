@@ -16,7 +16,7 @@ optimum = [54, 704, 1278, 1359, 1582, 1659, 2297, 2099, 2724, 2834, 2991, 2867, 
 
 f = open("resultats.txt", "w")
 f.write('Fichier | Cmin | Optimal | Ecart' +'\n')
-temps_max = 1 # Temps maximal d'un calcul en secondes (ici 10 minutes)
+temps_max = 600 # Temps maximal d'un calcul en secondes (ici 10 minutes)
 
 for i in range(len(fichiers)):
 
@@ -42,7 +42,10 @@ for i in range(len(fichiers)):
 
     ordo = ordonnancement.Ordonnancement(population[0].nb_machines) # Création d'un nouvel ordonnancement
     ordo.ordonnancer_liste_job(meilleure_sequence)
+    """
     ordo.afficher() # Affichage de notre solution
     print("\n")
+    """
+    print("Done")
     f.write(fichiers[i]+' '+str(Cmin)+' '+str(optimal)+' '+str(round(100*(Cmin-optimal)/optimal,1))+'%'+'\n')
 f.close()
