@@ -5,39 +5,46 @@ import mutation
 import selection
 import ordonnancement
 import time
+import statistics
 
 ### Algorithme Génétique ###
 
 N = 1000
 p = 0.8
 
-fichiers = ["jeu1.txt", "jeu2.txt", "tai01.txt", "tai02.txt", "tai11.txt", "tai12.txt", "tai21.txt", "tai22.txt", "tai31.txt", "tai32.txt", "tai41.txt", "tai42.txt", "tai51.txt", "tai52.txt"]
-optimum = [54, 704, 1278, 1359, 1582, 1659, 2297, 2099, 2724, 2834, 2991, 2867, 3874, 3704]
+fichiers = ["tai01.txt", "tai02.txt", "tai11.txt", "tai12.txt", "tai21.txt", "tai22.txt", "tai31.txt", "tai32.txt", "tai41.txt", "tai42.txt", "tai51.txt", "tai52.txt"]
+optimum = [1278, 1359, 1582, 1659, 2297, 2099, 2724, 2834, 2991, 2867, 3874, 3704]
 
-f = open("resultats.txt", "w")
-f.write('Fichier | Cmin | Optimal | Ecart' +'\n')
-temps_max = 600 # Temps maximal d'un calcul en secondes (ici 10 minutes)
+m = input("Entrez le nom du fichier: resultats_")
+f = open("resultats_"+ m +".txt", "w")
+f.write('Fichiers  | Best | DRel | Moyenne | Depart- | Depart+ |' +'\n')
+temps_max = 60 # Temps maximal d'un calcul en secondes (ici 10 minutes)
 
 for i in range(len(fichiers)):
 
     print("Fichier:",fichiers[i])
-    print("\n")
-
+    
     population = generation.generation_aleatoire(fichiers[i], N) # Génération
     population = sorted(population, key=lambda ordonnancement: ordonnancement.dur)
 
-    Cmin = population[0].dur # Meilleur résultat
+    Cmin = population[0].dur # Meilleur résultat départ
+    C = Cmin
+    Cmax = population[-1].dur # Pire résultat départ
+
+    solutions_initiales = [population[i].dur for i in range(len(population))]
+    Moy = statistics.mean(solutions_initiales)
+
     meilleure_sequence = population[0].seq # Meilleure séquence
     temps_initial = time.time()
     optimal = optimum[i] # Optimal connu pour arrêt
 
-    while (Cmin > optimal) and (time.time()-temps_initial < temps_max): 
+    while (C > optimal) and (time.time()-temps_initial < temps_max): 
         appariement.appariement_population(population) # Appariement aléatoire
         population = croisement.croisement_population(population) # Croisement
-        mutation.mutation_population(population, 20) # Mutation 20%
+        mutation.mutation_population(population, 10) # Mutation
         population = selection.selection_population(population, p) # Sélection
-        if Cmin > population[0].dur: # Sauvegarde du meilleur individu
-            Cmin = population[0].dur
+        if C > population[0].dur: # Sauvegarde du meilleur individu
+            C = population[0].dur
             meilleure_sequence = population[0].seq
 
     ordo = ordonnancement.Ordonnancement(population[0].nb_machines) # Création d'un nouvel ordonnancement
@@ -47,5 +54,5 @@ for i in range(len(fichiers)):
     print("\n")
     """
     print("Done")
-    f.write(fichiers[i]+' '+str(Cmin)+' '+str(optimal)+' '+str(round(100*(Cmin-optimal)/optimal,1))+'%'+'\n')
+    f.write(fichiers[i]+'   '+str(C)+'   '+str(round(100*(Cmin-C)/C,1))+'%'+'   '+str(round(Moy,1))+'     '+str(Cmin)+'      '+str(Cmax)+'\n')
 f.close()
