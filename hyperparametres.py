@@ -50,6 +50,9 @@ for i in range(10): # On fait 10 epoch
     meilleures_solutions_random.append(C)
 f.write(str(statistics.mean(meilleures_solutions_random))+'\n')
 
+for j in range(len(meilleures_solutions_random)):
+    f.write(str(meilleures_solutions_random[j])+' ')
+
 f.write('Sorted: ')
 meilleures_solutions_sorted = []
 
@@ -68,6 +71,9 @@ for i in range(10): # On fait 10 epoch
             meilleure_sequence = population[0].seq
     meilleures_solutions_sorted.append(C)
 f.write(str(statistics.mean(meilleures_solutions_sorted))+'\n')
+
+for j in range(len(meilleures_solutions_random)):
+    f.write(str(meilleures_solutions_sorted[j])+' ')
 
 f.write('Pairing: ')
 meilleures_solutions_pairing = []
@@ -89,6 +95,9 @@ for i in range(10): # On fait 10 epoch
     meilleures_solutions_pairing.append(C)
 f.write(str(statistics.mean(meilleures_solutions_pairing))+'\n')
 
+for j in range(len(meilleures_solutions_random)):
+    f.write(str(meilleures_solutions_pairing[j])+' ')
+
 f.write('Mixed Pairing: ')
 meilleures_solutions_mixed_pairing = []
 
@@ -108,5 +117,8 @@ for i in range(10): # On fait 10 epoch
             meilleure_sequence = population[0].seq
     meilleures_solutions_mixed_pairing.append(C)
 f.write(str(statistics.mean(meilleures_solutions_mixed_pairing))+'\n')
+
+for j in range(len(meilleures_solutions_random)):
+    f.write(str(meilleures_solutions_mixed_pairing[j])+' ')
 
 f.close()
