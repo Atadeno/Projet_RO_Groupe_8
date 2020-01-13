@@ -1,0 +1,6 @@
+Test Differents Appariements
+Cmin: 2534 Cmax: 3007 Moyenne: 2774.658
+Random: 2367.6
+Sorted: 2368.2
+Pairing: 2381.1
+Mixed Pairing: 2365.9

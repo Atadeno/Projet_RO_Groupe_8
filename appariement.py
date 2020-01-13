@@ -1,4 +1,5 @@
 import random
+import ordonnancement
 
 ### Appariement ###
 
@@ -13,11 +14,11 @@ def appariement_population(population):
 	
 #On fait un appariement par valeur de Cmax croissant
 def C_pairing(L):
-	L = sorted(L, key = lambda colonnes: colonnes[1])
+	L = sorted(L, key = lambda ordonnancement: ordonnancement.dur)
 
 
 def pairing(L):
-	L = sorted(L, key = lambda colonnes: colonnes[1])
+	L = sorted(L,  key = lambda ordonnancement: ordonnancement.dur)
 	n = int(len(L)/2)
 	M=[]
 	for k in range(n):
@@ -27,7 +28,7 @@ def pairing(L):
 	
 #on apparie le Cmax minimal avec le maximal
 def mixed_pairing(L):
-	L = sorted(L, key = lambda colonnes: colonnes[1])
+	L = sorted(L,  key = lambda ordonnancement: ordonnancement.dur)
 	m = len(L)
 	n = int(m/2)
 	M=[]
