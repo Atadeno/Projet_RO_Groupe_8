@@ -14,8 +14,7 @@ p = 0.8
 
 fichier = "tai21.txt"
 
-m = input("Entrez le nom du fichier: test_appariement_")
-f = open("test_appariement_"+ m +".txt", "w")
+f = open("test_appariement.txt", "w")
 f.write('Test Differents Appariements' +'\n')
 temps_max = 360 # Temps maximal d'un calcul en secondes (ici 10 minutes)
 
