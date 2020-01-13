@@ -17,7 +17,7 @@ fichier = "tai21.txt"
 m = input("Entrez le nom du fichier: test_appariement_")
 f = open("test_appariement_"+ m +".txt", "w")
 f.write('Test Differents Appariements' +'\n')
-temps_max = 60 # Temps maximal d'un calcul en secondes (ici 10 minutes)
+temps_max = 360 # Temps maximal d'un calcul en secondes (ici 10 minutes)
 
 population_initiale = generation.generation_aleatoire(fichier, N) # Génération
 population_initiale = sorted(population_initiale, key=lambda ordonnancement: ordonnancement.dur)
@@ -52,7 +52,7 @@ f.write(str(statistics.mean(meilleures_solutions_random))+'\n')
 
 for j in range(len(meilleures_solutions_random)):
     f.write(str(meilleures_solutions_random[j])+' ')
-
+f.write('\n')
 f.write('Sorted: ')
 meilleures_solutions_sorted = []
 
@@ -74,7 +74,7 @@ f.write(str(statistics.mean(meilleures_solutions_sorted))+'\n')
 
 for j in range(len(meilleures_solutions_random)):
     f.write(str(meilleures_solutions_sorted[j])+' ')
-
+f.write('\n')
 f.write('Pairing: ')
 meilleures_solutions_pairing = []
 
@@ -97,7 +97,7 @@ f.write(str(statistics.mean(meilleures_solutions_pairing))+'\n')
 
 for j in range(len(meilleures_solutions_random)):
     f.write(str(meilleures_solutions_pairing[j])+' ')
-
+f.write('\n')
 f.write('Mixed Pairing: ')
 meilleures_solutions_mixed_pairing = []
 
