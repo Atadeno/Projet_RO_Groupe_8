@@ -16,7 +16,7 @@ fichier = "tai21.txt"
 
 f = open("test_appariement.txt", "w")
 f.write('Test Differents Appariements' +'\n')
-temps_max = 360 # Temps maximal d'un calcul en secondes (ici 10 minutes)
+temps_max = 360 # Temps maximal d'un calcul en secondes
 
 population_initiale = generation.generation_aleatoire(fichier, N) # Génération
 population_initiale = sorted(population_initiale, key=lambda ordonnancement: ordonnancement.dur)
