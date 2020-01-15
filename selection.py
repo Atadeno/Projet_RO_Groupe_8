@@ -46,4 +46,5 @@ def selection_population_roulette(population):
         while cumul_duree[i]<p:
             i-=-1
         selected.append(population[i])
+    selected = sorted(selected, key=lambda ordonnancement: ordonnancement.dur)
     return selected 
