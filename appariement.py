@@ -11,7 +11,6 @@ def appariement_random(population):
     random.shuffle(population)
 	
 	
-	
 #On fait un appariement par valeur de Cmax croissant
 def C_pairing(L):
 	L = sorted(L, key = lambda ordonnancement: ordonnancement.dur)

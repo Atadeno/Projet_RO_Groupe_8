@@ -22,7 +22,6 @@ def selection_population_p_meilleurs(population, p):
 
 def selection_population_tournoi(population, T):
     L = []
-    print(len(population))
     while len(L)<(len(population)/2):
         tournoi = random.sample(population, T)
         tournoi = sorted(tournoi, key=lambda ordonnancement: ordonnancement.dur)

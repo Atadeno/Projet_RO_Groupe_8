@@ -17,7 +17,7 @@ fichier = "tai21.txt"
 
 f = open("test_selection.txt", "w")
 f.write('Test Differentes Selections' +'\n')
-temps_max = 1 # Temps maximal d'un calcul en secondes
+temps_max = 10 # Temps maximal d'un calcul en secondes
 
 population_initiale = generation.generation_aleatoire(fichier, N) # Génération
 population_initiale = sorted(population_initiale, key=lambda ordonnancement: ordonnancement.dur)
@@ -51,7 +51,7 @@ f.write(str(statistics.mean(meilleures_solutions_p_meilleurs))+'\n')
 for j in range(len(meilleures_solutions_p_meilleurs)):
     f.write(str(meilleures_solutions_p_meilleurs[j])+' ')
 f.write('\n')
-f.write('Nombre de génération: '+str(e)+'\n')
+f.write('Nombre de generation: '+str(e)+'\n')
 
 f.write('Roulette: ')
 meilleures_solutions_roulette = []
@@ -75,7 +75,7 @@ f.write(str(statistics.mean(meilleures_solutions_roulette))+'\n')
 for j in range(len(meilleures_solutions_roulette)):
     f.write(str(meilleures_solutions_roulette[j])+' ')
 f.write('\n')
-f.write('Nombre de génération: '+str(e)+'\n')
+f.write('Nombre de generation: '+str(e)+'\n')
 
 f.write('Tournois: ')
 meilleures_solutions_tournois = []
@@ -99,5 +99,5 @@ f.write(str(statistics.mean(meilleures_solutions_tournois))+'\n')
 for j in range(len(meilleures_solutions_tournois)):
     f.write(str(meilleures_solutions_tournois[j])+' ')
 f.write('\n')
-f.write('Nombre de génération: '+str(e)+'\n')
+f.write('Nombre de generation: '+str(e)+'\n')
 f.close()
