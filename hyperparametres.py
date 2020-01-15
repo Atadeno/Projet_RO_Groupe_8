@@ -11,12 +11,13 @@ import statistics
 
 N = 500
 p = 0.8
+T = 10
 
 fichier = "tai21.txt"
 
-f = open("test_appariement.txt", "w")
-f.write('Test Differents Appariements' +'\n')
-temps_max = 360 # Temps maximal d'un calcul en secondes
+f = open("test_selection.txt", "w")
+f.write('Test Differentes Selections' +'\n')
+temps_max = 1 # Temps maximal d'un calcul en secondes
 
 population_initiale = generation.generation_aleatoire(fichier, N) # Génération
 population_initiale = sorted(population_initiale, key=lambda ordonnancement: ordonnancement.dur)
@@ -29,95 +30,74 @@ Moy = statistics.mean(solutions_initiales)
 
 f.write('Cmin: '+str(Cmin)+' '+'Cmax: '+str(Cmax)+' '+'Moyenne: '+str(Moy)+'\n')
 
-f.write('Random: ')
-meilleures_solutions_random = []
+f.write('P Meilleurs: ')
+meilleures_solutions_p_meilleurs = []
 
 for i in range(10): # On fait 10 epoch
     temps_initial = time.time()
     C = Cmin
     population = population_initiale
-    meilleure_sequence = population[0].seq
-
+    e = 0
     while (time.time()-temps_initial < temps_max): 
-        appariement.appariement_population(population) # Appariement aléatoire
         population = croisement.croisement_population(population) # Croisement
         mutation.mutation_population(population, 10) # Mutation
-        population = selection.selection_population(population, p) # Sélection
+        population = selection.selection_population_p_meilleurs(population, p) # Sélection 80% meilleurs
+        e+=1
         if C > population[0].dur: # Sauvegarde du meilleur individu
             C = population[0].dur
-            meilleure_sequence = population[0].seq
-    meilleures_solutions_random.append(C)
-f.write(str(statistics.mean(meilleures_solutions_random))+'\n')
+    meilleures_solutions_p_meilleurs.append(C)
+f.write(str(statistics.mean(meilleures_solutions_p_meilleurs))+'\n')
 
-for j in range(len(meilleures_solutions_random)):
-    f.write(str(meilleures_solutions_random[j])+' ')
+for j in range(len(meilleures_solutions_p_meilleurs)):
+    f.write(str(meilleures_solutions_p_meilleurs[j])+' ')
 f.write('\n')
-f.write('Sorted: ')
-meilleures_solutions_sorted = []
+f.write('Nombre de génération: '+str(e)+'\n')
+
+f.write('Roulette: ')
+meilleures_solutions_roulette = []
 
 for i in range(10): # On fait 10 epoch
     temps_initial = time.time()
     C = Cmin
     population = population_initiale
-    meilleure_sequence = population[0].seq
-
+    e = 0
     while (time.time()-temps_initial < temps_max): 
+        appariement.C_pairing(population)
         population = croisement.croisement_population(population) # Croisement
         mutation.mutation_population(population, 10) # Mutation
-        population = selection.selection_population(population, p) # Sélection
+        population = selection.selection_population_roulette(population) # Sélection par tounois de T individus
+        e+=1
         if C > population[0].dur: # Sauvegarde du meilleur individu
             C = population[0].dur
-            meilleure_sequence = population[0].seq
-    meilleures_solutions_sorted.append(C)
-f.write(str(statistics.mean(meilleures_solutions_sorted))+'\n')
+    meilleures_solutions_roulette.append(C)
+f.write(str(statistics.mean(meilleures_solutions_roulette))+'\n')
 
-for j in range(len(meilleures_solutions_random)):
-    f.write(str(meilleures_solutions_sorted[j])+' ')
+for j in range(len(meilleures_solutions_roulette)):
+    f.write(str(meilleures_solutions_roulette[j])+' ')
 f.write('\n')
-f.write('Pairing: ')
-meilleures_solutions_pairing = []
+f.write('Nombre de génération: '+str(e)+'\n')
+
+f.write('Tournois: ')
+meilleures_solutions_tournois = []
 
 for i in range(10): # On fait 10 epoch
     temps_initial = time.time()
     C = Cmin
     population = population_initiale
-    meilleure_sequence = population[0].seq
-
+    e = 0
     while (time.time()-temps_initial < temps_max): 
-        appariement.pairing(population) # Appariement aléatoire
+        appariement.C_pairing(population)
         population = croisement.croisement_population(population) # Croisement
         mutation.mutation_population(population, 10) # Mutation
-        population = selection.selection_population(population, p) # Sélection
+        population = selection.selection_population_tournoi(population,T) # Sélection par tounois de T participants
+        e+=1
         if C > population[0].dur: # Sauvegarde du meilleur individu
             C = population[0].dur
-            meilleure_sequence = population[0].seq
-    meilleures_solutions_pairing.append(C)
-f.write(str(statistics.mean(meilleures_solutions_pairing))+'\n')
+    meilleures_solutions_tournois.append(C)
+f.write(str(statistics.mean(meilleures_solutions_tournois))+'\n')
 
-for j in range(len(meilleures_solutions_random)):
-    f.write(str(meilleures_solutions_pairing[j])+' ')
+for j in range(len(meilleures_solutions_tournois)):
+    f.write(str(meilleures_solutions_tournois[j])+' ')
 f.write('\n')
-f.write('Mixed Pairing: ')
-meilleures_solutions_mixed_pairing = []
-
-for i in range(10): # On fait 10 epoch
-    temps_initial = time.time()
-    C = Cmin
-    population = population_initiale
-    meilleure_sequence = population[0].seq
-
-    while (time.time()-temps_initial < temps_max): 
-        appariement.mixed_pairing(population) # Appariement aléatoire
-        population = croisement.croisement_population(population) # Croisement
-        mutation.mutation_population(population, 10) # Mutation
-        population = selection.selection_population(population, p) # Sélection
-        if C > population[0].dur: # Sauvegarde du meilleur individu
-            C = population[0].dur
-            meilleure_sequence = population[0].seq
-    meilleures_solutions_mixed_pairing.append(C)
-f.write(str(statistics.mean(meilleures_solutions_mixed_pairing))+'\n')
-
-for j in range(len(meilleures_solutions_random)):
-    f.write(str(meilleures_solutions_mixed_pairing[j])+' ')
-
+f.write('Nombre de génération: '+str(e)+'\n')
 f.close()
