@@ -1,0 +1,11 @@
+Test Differentes Selections
+Cmin: 2492 Cmax: 3142 Moyenne: 2788.73
+P Meilleurs: 2482.6
+2492 2492 2476 2489 2489 2476 2484 2476 2476 2476 
+Nombre de generation: 6
+Roulette: 2492
+2492 2492 2492 2492 2492 2492 2492 2492 2492 2492 
+Nombre de generation: 3
+Tournois: 2475.1
+2467 2476 2489 2492 2467 2489 2467 2467 2477 2460 
+Nombre de generation: 6
