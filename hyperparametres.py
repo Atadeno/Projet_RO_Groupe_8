@@ -15,11 +15,11 @@ T = 10
 
 fichier = "tai21.txt"
 
-f = open("test_mutation.txt", "w")
+f = open("test_mutation_2.txt", "w")
 f.write('Test Differentes Valeurs de Mutation' +'\n')
 temps_max = 360 # Temps maximal d'un calcul en secondes
 
-mutations = [1, 5, 10, 15, 20]
+mutations = [7,8,9,10,11,12,13]
 
 population_initiale = generation.generation_aleatoire(fichier, N) # Génération
 population_initiale = sorted(population_initiale, key=lambda ordonnancement: ordonnancement.dur)
