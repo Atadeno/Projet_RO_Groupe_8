@@ -15,7 +15,7 @@ def swap(A, B, i, j):
 
 
 # prend deux listes d'entiers entrée
-# croise ces deux listes d'entiers
+# croise ces deux listes de jobs
 # retourne les deux listes d'entiers croisées
 
 def croiser_liste(L, M):
