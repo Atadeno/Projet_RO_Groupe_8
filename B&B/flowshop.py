@@ -246,63 +246,63 @@ class Flowshop():
         return 0
 
 
-if __name__ == "__main__":
-    flow_shop = Flowshop()
-    ordo = flow_shop.definir_par("jeu2.txt")
-    ordo.afficher()
-    start = datetime.now()
-    liste_NEH = flow_shop.creer_liste_NEH()
-    duree_NEH = datetime.now() - start
-    duree_NEH = duree_NEH.total_seconds()
-    liste_NEH.afficher()
-    print()
-    print("**********************************************")
-    print("TEST EXO5")
-    print("**** TEST DUREE DE DISPONOBILITE ***")
-    print("La machine numéro ",
-          2,
-          " sera dispoible pour le job numéro ",
-          flow_shop.get_job_by_id(2),
-          " dans ",
-          flow_shop.calculer_date_dispo(liste_NEH,
-                                        2,
-                                        flow_shop.get_job_by_id(2)),
-          ' minutes')
-    print()
-    print("**** TEST DUREE LATENCE ****")
-    print("Le job numéro ",
-          flow_shop.get_job_by_id(2),
-          "est à la machine",
-          2,
-          " et attendra ",
-          flow_shop.calculer_duree_latence(liste_NEH,
-                                           2,
-                                           flow_shop.get_job_by_id(2)),
-          " minutes avant de terminer")
-    print()
-    print("**** TEST DUREE DES JOBS ***")
-    liste_jobs = [1, 2, 3]
-    print("le temps d'execution des jobs ",
-          liste_jobs,
-          " sur la machine numéro ",
-          2,
-          "est égal à ",
-          flow_shop.calculer_duree_jobs(4, liste_jobs))
-
-    print()
-    print("test brut", flow_shop.calculer_date_dispo(ordo, 2, flow_shop.get_job_by_id(3)))
-    print("**** TEST DUREE DE LA VALEUR MINIMALE ***")
-    LB = flow_shop.calculer_borne_inf(ordo, liste_jobs)
-    print("La borne inférieure est égale à ", LB)
-
-    print()
-    print("**** TEST BRANCH & BOUND ***")
-    start = datetime.now()
-    flow_shop.evaluation_separation_()
-    duree_B_and_B = datetime.now() - start
-    duree_B_and_B = duree_B_and_B.total_seconds()
-    print()
-    print("L'heuristique NEH a duré : {} secondes\n"
-          "le B&B a duré : {} secondes ".format(duree_NEH, duree_B_and_B))
-
+#if __name__ == "__main__":
+#    flow_shop = Flowshop()
+#    ordo = flow_shop.definir_par("jeu2.txt")
+#    ordo.afficher()
+#    start = datetime.now()
+#    liste_NEH = flow_shop.creer_liste_NEH()
+#    duree_NEH = datetime.now() - start
+#    duree_NEH = duree_NEH.total_seconds()
+#    liste_NEH.afficher()
+#    print()
+#    print("**********************************************")
+#    print("TEST EXO5")
+#    print("**** TEST DUREE DE DISPONOBILITE ***")
+#    print("La machine numéro ",
+#          2,
+#          " sera dispoible pour le job numéro ",
+#          flow_shop.get_job_by_id(2),
+#          " dans ",
+#          flow_shop.calculer_date_dispo(liste_NEH,
+#                                        2,
+#                                        flow_shop.get_job_by_id(2)),
+#          ' minutes')
+#    print()
+#    print("**** TEST DUREE LATENCE ****")
+#    print("Le job numéro ",
+#          flow_shop.get_job_by_id(2),
+#          "est à la machine",
+#          2,
+#          " et attendra ",
+#          flow_shop.calculer_duree_latence(liste_NEH,
+#                                           2,
+#                                           flow_shop.get_job_by_id(2)),
+#          " minutes avant de terminer")
+#    print()
+#    print("**** TEST DUREE DES JOBS ***")
+#    liste_jobs = [1, 2, 3]
+#    print("le temps d'execution des jobs ",
+#          liste_jobs,
+#          " sur la machine numéro ",
+#          2,
+#          "est égal à ",
+#          flow_shop.calculer_duree_jobs(4, liste_jobs))
+#
+#    print()
+#    print("test brut", flow_shop.calculer_date_dispo(ordo, 2, flow_shop.get_job_by_id(3)))
+#    print("**** TEST DUREE DE LA VALEUR MINIMALE ***")
+#    LB = flow_shop.calculer_borne_inf(ordo, liste_jobs)
+#    print("La borne inférieure est égale à ", LB)
+#
+#    print()
+#    print("**** TEST BRANCH & BOUND ***")
+#    start = datetime.now()
+#    flow_shop.evaluation_separation_()
+#    duree_B_and_B = datetime.now() - start
+#    duree_B_and_B = duree_B_and_B.total_seconds()
+#    print()
+#    print("L'heuristique NEH a duré : {} secondes\n"
+#          "le B&B a duré : {} secondes ".format(duree_NEH, duree_B_and_B))
+#
 
