@@ -3,6 +3,7 @@ import ordonnancement
 import job
 import flowshop
 import random
+import numpy as np
 
 ### Génération ###
 
@@ -13,6 +14,10 @@ def generation_Heuristique (mon_fichier_txt, N):
     liste_job = ordo.seq
     nbr_Jobs=len(liste_job)
     
+    t=[] #processing time matrix
+    for job in liste_job
+        t.append(job.duree_op)
+        
     palmIndex=[0 for i in range(n)] #index de pente de Palmer de chaque tache
 
     for i in range(1,nbr_Jobs):
