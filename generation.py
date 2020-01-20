@@ -7,16 +7,14 @@ import numpy as np
 
 ### Génération ###
 
-def generation_Heuristique(mon_fichier_txt, N):
+def generation_Heuristique(mon_fichier_txt):
     flow_shop = flowshop.Flowshop()
     ordo = flow_shop.definir_par(mon_fichier_txt) # Construction d'un probleme avec un fichier .txt
     nb_machines = ordo.nb_machines
     liste_job = ordo.seq
     nbr_Jobs=len(liste_job)
     
-    #t=[[5,9,8,10,1],[9,3,10,1,8],[9,4,5,8,6],[4,8,8,7,2]] #processing time matrix
-    #nbr_Jobs=4
-    #nb_machines=5
+    t=[]
     for job in liste_job:
         t.append(job.duree_op)
         
@@ -43,17 +41,33 @@ def generation_Heuristique(mon_fichier_txt, N):
     johnsonSol=[0] #Solution basee sur indice de Johnson
     for k in range (1,nbr_Jobs):
         ind=0
-        while (ind<len(palmerSol) & palmIndex[palmerSol[ind]]<palmIndex[k]):
+        while (ind<len(palmerSol) and palmIndex[palmerSol[ind]]<palmIndex[k]):
             ind+=1
         palmerSol.insert(ind,k)
     
     for n in range(1,nbr_Jobs):
         ind2=0
-        while (ind2<len(johnsonSol) & johnIndex[johnsonSol[ind2]]<johnIndex[k]):
+        while (ind2<len(johnsonSol) and johnIndex[johnsonSol[ind2]]<johnIndex[k]):
             ind2+=1
         johnsonSol.insert(ind2,n)
 
-    return(palmerSol,johnsonSol)
+    liste_job_palmer = [ None for i in range(0,nbr_Jobs)]
+    liste_job_johnson = [ None for i in range(0,nbr_Jobs)]
+
+    for job in liste_job : # prob job potentiel manquant dans les deux listes
+        for i in range(0,nbr_Jobs) :
+            if job.numero() == palmerSol[i] :
+                liste_job_palmer[i] = job
+            if job.numero() == johnsonSol[i] :
+                liste_job_johnson[i] = job
+     
+    ordo_palmer = ordonnancement.Ordonnancement(nb_machines) # Création d'un nouvel ordonnancement
+    ordo_palmer.ordonnancer_liste_job(liste_job_palmer)
+
+    ordo_johnson = ordonnancement.Ordonnancement(nb_machines) # Création d'un nouvel ordonnancement
+    ordo_johnson.ordonnancer_liste_job(liste_job_johnson)
+
+    return(palmerSol,johnsonSol,ordo_palmer,ordo_johnson)
     
 
 
@@ -74,4 +88,7 @@ def generation_aleatoire(mon_fichier_txt, N):
         i-=-1
     return population_initiale
 
-pop = generation_Heuristique("jeu1.txt",2)
+pop = generation_Heuristique("tai21.txt")
+print(pop)
+pop[2].afficher()
+pop[3].afficher()
