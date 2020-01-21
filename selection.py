@@ -8,7 +8,6 @@ import random
 # On trie d'abord les individus par ordre croissant
 # On sélectionne les p meilleurs individus et les 1-p restants aléatoirement
 # Renvoie une liste de taille N triée pour appariement
-#
 
 p = 0.8
 
@@ -24,6 +23,18 @@ def selection_population_p_meilleurs(population, p):
 def selection_population_tournoi(population, T):
     L = []
     while len(L)<(len(population)/2):
+        tournoi = random.sample(population, T)
+        tournoi = sorted(tournoi, key=lambda ordonnancement: ordonnancement.dur)
+        L.append(tournoi[0])
+    return L
+
+def selection_population_tournoi2(population, T):
+    population = sorted(population, key=lambda ordonnancement: ordonnancement.dur) # Tri par la durée totale
+    n = len(population)
+    selected = population[:int(p*n/2)]
+    population = population[int(p*n/2):]
+    L = selected
+    while len(L)<(n/2):
         tournoi = random.sample(population, T)
         tournoi = sorted(tournoi, key=lambda ordonnancement: ordonnancement.dur)
         L.append(tournoi[0])
