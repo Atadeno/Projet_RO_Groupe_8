@@ -24,7 +24,7 @@ def generation_aleatoire(mon_fichier_txt, N):
     return population_initiale
 
 N = 1000 # TD Choisir N en fonction du nombre de jobs, N est pair
-pop = generation_aleatoire("jeu2.txt", N)
+
 
 """
 for i in range (10):

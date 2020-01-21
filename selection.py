@@ -10,6 +10,9 @@ import random
 # Renvoie une liste de taille N triée pour appariement
 
 p = 0.8
+def selection_random(population):
+    random.shuffle(population)
+    return population[:len(population)//2]
 
 def selection_population_p_meilleurs(population, p):
     population = sorted(population, key=lambda ordonnancement: ordonnancement.dur) # Tri par la durée totale
