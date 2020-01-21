@@ -9,16 +9,16 @@ import statistics
 
 ### Algorithme Génétique ###
 
-N = 1000
+N = 500
 p = 0.8
+T = 10
 
 fichiers = ["tai01.txt", "tai02.txt", "tai11.txt", "tai12.txt", "tai21.txt", "tai22.txt", "tai31.txt", "tai32.txt", "tai41.txt", "tai42.txt", "tai51.txt", "tai52.txt"]
 optimum = [1278, 1359, 1582, 1659, 2297, 2099, 2724, 2834, 2991, 2867, 3874, 3704]
 
-m = input("Entrez le nom du fichier: resultats_")
-f = open("resultats_"+ m +".txt", "w")
+f = open("resultats_opti.txt", "w")
 f.write('Fichiers  | Best | DRel | Moyenne | Depart- | Depart+ |' +'\n')
-temps_max = 60 # Temps maximal d'un calcul en secondes (ici 10 minutes)
+temps_max = 600   # Temps maximal d'un calcul en secondes (ici 10 minutes)
 
 for i in range(len(fichiers)):
 
@@ -39,10 +39,10 @@ for i in range(len(fichiers)):
     optimal = optimum[i] # Optimal connu pour arrêt
 
     while (C > optimal) and (time.time()-temps_initial < temps_max): 
-        appariement.appariement_population(population) # Appariement aléatoire
         population = croisement.croisement_population(population) # Croisement
         mutation.mutation_population(population, 10) # Mutation
-        population = selection.selection_population(population, p) # Sélection
+        population = selection.selection_population_tournoi(population, T) # Sélection par tounois
+        appariement.C_pairing(population)
         if C > population[0].dur: # Sauvegarde du meilleur individu
             C = population[0].dur
             meilleure_sequence = population[0].seq
