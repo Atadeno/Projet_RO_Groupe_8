@@ -8,6 +8,7 @@ import random
 # On trie d'abord les individus par ordre croissant
 # On sélectionne les p meilleurs individus et les 1-p restants aléatoirement
 # Renvoie une liste de taille N triée pour appariement
+#
 
 p = 0.8
 
