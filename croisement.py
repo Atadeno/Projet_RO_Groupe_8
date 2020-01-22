@@ -1,5 +1,6 @@
 import ordonnancement as ord
 import job
+import random
 
 ### Croisement ###
 
@@ -112,6 +113,8 @@ def repair(list_jobs_L, list_jobs_M) :
     print("Missing L", missing_elements_L)
     print("Missing M", missing_elements_M)
     """
+    random.shuffle(missing_elements_L)
+    random.shuffle(missing_elements_M)
     # Etape 3 : Remplacer les doublons par les manquants
     # on remplace les doublons dans les listes exogènes par les manquants
     for i in range(0, len(doubled_elements_L)):

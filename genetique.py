@@ -12,19 +12,19 @@ import numpy as np
 ### Algorithme Génétique ###
 
 N = 5000
-p = 0.5
+p = 0.05
 T = 2
 
-fichiers = ["tai21.txt"]#["tai01.txt", "tai02.txt", "tai11.txt", "tai12.txt", "tai21.txt", "tai22.txt", "tai31.txt", "tai32.txt", "tai41.txt", "tai42.txt", "tai51.txt", "tai52.txt"]
-optimum = [2297]#[1278, 1359, 1582, 1659, 2297, 2099, 2724, 2834, 2991, 2867, 3874, 3704]
+fichiers = ["tai21.txt"]#, "tai42.txt", "tai51.txt", "tai52.txt"] #"tai01.txt", "tai02.txt", "tai11.txt", "tai12.txt", "tai21.txt", "tai22.txt", "tai31.txt", "tai32.txt", 
+optimum = [2297]
 
-f = open("resultats_opti.txt", "w")
+f = open("resultats.txt", "w")
 f.write('Fichiers  | Best | DRel | Moyenne | Depart- | Depart+ |' +'\n')
-temps_max = 60 # Temps maximal d'un calcul en secondes (ici 10 minutes)
+temps_max = 600 # Temps maximal d'un calcul en secondes (ici 10 minutes)
 Cmin_tab=[]
 Cmax_tab=[]
 Moy_tab=[]
-temps_x=1
+temps_x=5
 
 for i in range(len(fichiers)):
 
@@ -44,7 +44,8 @@ for i in range(len(fichiers)):
     temps_initial = time.time()
     optimal = optimum[i] # Optimal connu pour arrêt
     now1=time.time()
-    while (C > optimal) and (time.time()-temps_initial < temps_max): 
+    while (time.time()-temps_initial < temps_max): 
+        
         if time.time()-now1 >= temps_x:
             population = sorted(population, key = lambda ordonnancement: ordonnancement.dur)
             Cmin_tab.append(population[0].dur)
@@ -52,10 +53,11 @@ for i in range(len(fichiers)):
             solutions = [population[i].dur for i in range(len(population))]
             Moy_tab.append(statistics.mean(solutions))
             now1=time.time()
+        
         population = croisement.croisement_population(population) # Croisement
         mutation.mutation_population(population, 10) # Mutation
-        population = selection.selection_population_p_meilleurs(population,p) # Sélection par tounois
-        appariement.C_pairing(population)
+        population = selection.selection_random(population) # Sélection par tounois
+        #appariement.C_pairing(population)
         if C > population[0].dur: # Sauvegarde du meilleur individu
             C = population[0].dur
             meilleure_sequence = population[0].seq
@@ -67,12 +69,18 @@ for i in range(len(fichiers)):
     print("\n")
     """
     print("Done")
-    f.write(fichiers[i]+'   '+str(C)+'   '+str(round(100*(Cmin-C)/C,1))+'%'+'   '+str(round(Moy,1))+'     '+str(Cmin)+'      '+str(Cmax)+'\n')
+    f.write(fichiers[i]+'   '+str(C)+'   '+str(round(100*(Cmin-C)/C,1))+'%'+'   '+str(round(Moy,1))+'     '+str(Cmin)+'      '+str(Cmax)+'     '+str(optimal)+'\n')
 f.close()
 
-liste_temps= np.linspace(0, temps_x*len(Cmax_tab), num=len(Cmax_tab))
-print(liste_temps)
-plt.plot(np.array(Cmin_tab),color='g')
-plt.plot(np.array(Cmax_tab),color='r')
-plt.plot(np.array(Moy_tab),color='k')
+liste_temps= np.linspace(0, 600, num=len(Cmax_tab))
+liste_optimal=np.array(optimum * len(Cmax_tab))
+plt.plot(liste_temps,np.array(Cmin_tab),color='g',label='Cmin')
+plt.plot(liste_temps,np.array(Cmax_tab),color='r',label='Cmax')
+plt.plot(liste_temps,np.array(Moy_tab),color='k',label='Moyenne')
+plt.plot(liste_temps,liste_optimal, label='Optimum')
+plt.title("Overview Genetic Algorithm")
+plt.xlabel("Temps en secondes")
+plt.ylabel("C Makespan")
+plt.legend(loc="upper right")
 plt.show()
+plt.savefig('Courbe')

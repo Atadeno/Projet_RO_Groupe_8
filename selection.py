@@ -51,3 +51,15 @@ def selection_population_roulette(population):
         selected.append(population[i])
     selected = sorted(selected, key=lambda ordonnancement: ordonnancement.dur)
     return selected 
+
+def selection_population_tournoi2(population, T):
+    population = sorted(population, key=lambda ordonnancement: ordonnancement.dur) # Tri par la durée totale
+    n = len(population)
+    selected = population[:int(p*n/2)]
+    population = population[int(p*n/2):]
+    L = selected
+    while len(L)<(n/2):
+        tournoi = random.sample(population, T)
+        tournoi = sorted(tournoi, key=lambda ordonnancement: ordonnancement.dur)
+        L.append(tournoi[0])
+    return L
