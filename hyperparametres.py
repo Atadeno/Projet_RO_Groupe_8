@@ -9,17 +9,17 @@ import statistics
 
 ### Algorithme Génétique ###
 
-N = 10
+N = 500
 p = 0.8
 T = 10
 
 fichier = "tai21.txt"
 
-f = open("test_mutation_2.txt", "w")
+f = open("test_mutation_1_10.txt", "w")
 f.write('Test Differentes Valeurs de Mutation' +'\n')
-temps_max = 360 # Temps maximal d'un calcul en secondes
+temps_max = 300 # Temps maximal d'un calcul en secondes
 
-mutations = [7,8,9,10,11,12,13]
+mutations = [1,2,3,4,5,6,7,8,9,10]
 
 population_initiale = generation.generation_aleatoire(fichier, N) # Génération
 population_initiale = sorted(population_initiale, key=lambda ordonnancement: ordonnancement.dur)
@@ -41,10 +41,10 @@ for r in range(len(mutations)):
         population = population_initiale
         #e = 0
         while (time.time()-temps_initial < temps_max):
-            appariement.C_pairing(population)
             population = croisement.croisement_population(population) # Croisement
             mutation.mutation_population(population, mutations[r]) # Mutation
-            population = selection.selection_population_tournoi(population, T) # Sélection 80% meilleurs
+            population = selection.selection_population_tournoi(population, T) # Sélection par tounois
+            appariement.C_pairing(population)
             #e+=1
             if C > population[0].dur: # Sauvegarde du meilleur individu
                 C = population[0].dur

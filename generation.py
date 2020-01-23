@@ -87,8 +87,3 @@ def generation_aleatoire(mon_fichier_txt, N):
         population_initiale.append(ordo_new)
         i-=-1
     return population_initiale
-
-pop = generation_Heuristique("tai21.txt")
-print(pop)
-pop[2].afficher()
-pop[3].afficher()
